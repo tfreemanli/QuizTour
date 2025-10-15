@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">QuizTour</string>
+    <string-array name="quiz_filter">
+        <item>All</item>
+        <item>Ongoing</item>
+        <item>Upcoming</item>
+        <item>Past</item>
+    </string-array>
+
+    <string-array name="createquiz_difficulty">
+        <item>Any Difficulty</item>
+        <item>easy</item>
+        <item>medium</item>
+        <item>hard</item>
+    </string-array>
+</resources>
