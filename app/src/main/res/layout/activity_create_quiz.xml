@@ -133,7 +133,8 @@
             android:text="Save"
             android:layout_marginHorizontal="3dp"
             android:textColor="@color/black"
-            android:backgroundTint="@color/primary"/>
+            android:backgroundTint="@color/primary"
+            android:onClick="save"/>
         <Button
             android:id="@+id/btn_createquiz_cancel"
             android:layout_width="wrap_content"

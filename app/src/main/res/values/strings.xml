@@ -8,7 +8,7 @@
     </string-array>
 
     <string-array name="createquiz_difficulty">
-        <item>Any Difficulty</item>
+        <item>Random Difficulty</item>
         <item>easy</item>
         <item>medium</item>
         <item>hard</item>

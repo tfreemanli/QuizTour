@@ -22,7 +22,7 @@ public class Config {
         //spn_category = findViewById(R.id.spn_createquiz_category);
 
         ArrayList<CategoryItem> categoryItems = new ArrayList<CategoryItem>();
-        categoryItems.add(new CategoryItem(0,"Any Category"));
+        categoryItems.add(new CategoryItem(0,"Random Category"));
         categoryItems.add(new CategoryItem(9,"General Knowledge"));
         categoryItems.add(new CategoryItem(10,"Entertainment: Books"));
         categoryItems.add(new CategoryItem(11,"Entertainment: Film"));

@@ -2,20 +2,28 @@ package com.freeman.quiztour;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -32,6 +40,7 @@ public class CreateQuizActivity extends AppCompatActivity implements QuestionCal
     ArrayList<Question> questions;
     RecyclerView rv;
     CreateQuizRVAdapter adapter;
+    final String TAG = "QuizTour";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,6 +113,10 @@ public class CreateQuizActivity extends AppCompatActivity implements QuestionCal
             tv_enddate.setError("End date is not validated");
             return false;
         }
+        if(questions == null || questions.size() == 0) {
+            Toast.makeText(this, "Reload questions first please.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
 
         return true;
     }
@@ -130,6 +143,38 @@ public class CreateQuizActivity extends AppCompatActivity implements QuestionCal
 
 
     public void save(View view) {
+        if(!validate()) {
+            return;
+        }
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        Quiz newquiz = new Quiz();
+        newquiz.setName(et_name.getText().toString());
+        newquiz.setCategory(spn_category.getSelectedItem().toString());
+        newquiz.setDifficulty(spn_difficulty.getSelectedItem().toString());
+        newquiz.setStartdate(tv_startdate.getText().toString());
+        newquiz.setEnddate(tv_enddate.getText().toString());
+        ArrayList<Rate> rates = new ArrayList<Rate>();
+        rates.add(new Rate(5,"sample@email.com"));
+        newquiz.setRates(rates);
+        newquiz.setQuestions(questions);
+        // Add a new document with a generated ID
+        db.collection("Quiz")
+                .add(newquiz)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Log.d(TAG, "Quiz added with ID: " + documentReference.getId());
+                        Toast.makeText(getApplicationContext(), "Quiz added with ID: " + documentReference.getId(), Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error adding document", e);
+                        Toast.makeText(getApplicationContext(), "Failed in adding Quiz.", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
     }
 
     @Override

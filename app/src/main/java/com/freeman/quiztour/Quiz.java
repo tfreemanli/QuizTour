@@ -4,21 +4,20 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Quiz {
-    private String name, category, difficulty;
-    private Date startdate, enddate;
-    private int rate;
+    private String name, category, difficulty,startdate, enddate;
     private ArrayList<Question> questions;
+    private ArrayList<Rate> rates;
 
     public Quiz() {
     }
 
-    public Quiz(String name, String category, String difficulty, Date startdate, Date enddate, int rate, ArrayList<Question> questions) {
+    public Quiz(String name, String category, String difficulty, String startdate, String enddate, ArrayList<Rate> rate, ArrayList<Question> questions) {
         this.name = name;
         this.category = category;
         this.difficulty = difficulty;
         this.startdate = startdate;
         this.enddate = enddate;
-        this.rate = rate;
+        this.rates = rate;
         this.questions = questions;
     }
 
@@ -46,28 +45,28 @@ public class Quiz {
         this.difficulty = difficulty;
     }
 
-    public Date getStartdate() {
+    public String getStartdate() {
         return startdate;
     }
 
-    public void setStartdate(Date startdate) {
+    public void setStartdate(String startdate) {
         this.startdate = startdate;
     }
 
-    public Date getEnddate() {
+    public String getEnddate() {
         return enddate;
     }
 
-    public void setEnddate(Date enddate) {
+    public void setEnddate(String enddate) {
         this.enddate = enddate;
     }
 
-    public int getRate() {
-        return rate;
+    public ArrayList<Rate> getRates() {
+        return rates;
     }
 
-    public void setRate(int rate) {
-        this.rate = rate;
+    public void setRates(ArrayList<Rate> rate) {
+        this.rates = rate;
     }
 
     public ArrayList<Question> getQuestions() {
