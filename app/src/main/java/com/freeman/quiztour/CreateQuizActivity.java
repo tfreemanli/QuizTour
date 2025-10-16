@@ -2,6 +2,7 @@ package com.freeman.quiztour;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -13,16 +14,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
-public class CreateQuizActivity extends AppCompatActivity {
+public class CreateQuizActivity extends AppCompatActivity implements QuestionCallback{
     EditText et_name;
     Spinner spn_category, spn_difficulty;
     Button btn_start_datepick, btn_end_datepick;
+    Button btn_reload, btn_save, btn_cancel;
     TextView tv_startdate, tv_enddate;
+    ArrayList<Question> questions;
     RecyclerView rv;
     CreateQuizRVAdapter adapter;
 
@@ -51,6 +58,16 @@ public class CreateQuizActivity extends AppCompatActivity {
         btn_start_datepick.setOnClickListener(v-> showDatePicker(tv_startdate));
         btn_end_datepick.setOnClickListener(v->showDatePicker(tv_enddate));
 
+        btn_reload = findViewById(R.id.btn_createquiz_reload);
+        btn_save = findViewById(R.id.btn_createquiz_save);
+        btn_cancel = findViewById(R.id.btn_createquiz_cancel);
+
+        rv = findViewById(R.id.rv_question);
+        rv.setLayoutManager(new LinearLayoutManager(this));
+        questions = new ArrayList<>();
+        adapter = new CreateQuizRVAdapter(questions, this);
+        rv.setAdapter(adapter);
+
     }
 
     private void showDatePicker(TextView tvDate) {
@@ -70,5 +87,62 @@ public class CreateQuizActivity extends AppCompatActivity {
                 year, month, day
         );
         dialog.show();
+    }
+
+    private boolean validate() {
+        if (et_name.getText().toString().isEmpty()) {
+            et_name.setError("Name is required");
+            return false;
+        }
+        String sStartdate = tv_startdate.getText().toString();
+        if (sStartdate.isEmpty() || !isValidDate(sStartdate, "dd/MM/yyyy")) {
+            tv_startdate.setError("Start date is not validated");
+            return false;
+        }
+        String sEnddate = tv_enddate.getText().toString();
+        if(sEnddate.isEmpty() || !isValidDate(sEnddate, "dd/MM/yyyy")) {
+            tv_enddate.setError("End date is not validated");
+            return false;
+        }
+
+        return true;
+    }
+
+    public static boolean isValidDate(String dateStr, String format) {
+        SimpleDateFormat sdf = new SimpleDateFormat(format);
+        sdf.setLenient(false); // 关闭宽松解析，严格判断
+        try {
+            Date date = sdf.parse(dateStr);
+            return true; // 解析成功，说明是合法日期
+        } catch (ParseException e) {
+            return false; // 解析失败，说明不合法
+        }
+    }
+
+
+    public void reload(View view) {
+        QuestionController api = new QuestionController(this);
+        CategoryItem curCate = (CategoryItem)spn_category.getSelectedItem();
+        String curDifficulty = spn_difficulty.getSelectedItem().toString();
+        if(curDifficulty.toLowerCase().contains("any difficulty")){ curDifficulty = null; }
+        api.start(curDifficulty, curCate.getId(), this);
+    }
+
+
+    public void save(View view) {
+    }
+
+    @Override
+    public void onSuccess(ArrayList<Question> arr) {
+        if(arr!= null){
+            questions.clear();
+            questions.addAll(arr);
+            adapter.notifyDataSetChanged();
+        }
+    }
+
+    @Override
+    public void onError(String err) {
+
     }
 }

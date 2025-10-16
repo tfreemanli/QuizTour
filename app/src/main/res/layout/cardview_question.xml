@@ -4,8 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
-    android:backgroundTint="@color/third"
-    >
+    android:background="@drawable/border_bg">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,17 +12,37 @@
         android:layout_margin="10dp"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tv_question"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Question"
-            android:textSize="18dp" />
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Q: "
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_question"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Question"
+                android:textSize="18dp" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Type: "
+                android:textStyle="bold"
+                android:textSize="14dp" />
 
             <TextView
                 android:id="@+id/tv_type"
@@ -33,12 +52,12 @@
                 android:text="type"
                 android:textSize="14dp" />
 
+
             <TextView
-                android:id="@+id/tv_category"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingEnd="14dp"
-                android:text="Category"
+                android:text="Difficulty: "
+                android:textStyle="bold"
                 android:textSize="14dp" />
 
             <TextView
@@ -51,6 +70,41 @@
 
         </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Category: "
+            android:textStyle="bold"
+            android:textSize="14dp" />
+
+        <TextView
+            android:id="@+id/tv_category"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingEnd="14dp"
+            android:text="Category"
+            android:textSize="14dp" />
+    </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Correct Answer: "
+                android:textStyle="bold"
+                android:textSize="14dp" />
+
             <TextView
                 android:id="@+id/tv_correctanswer"
                 android:layout_width="wrap_content"
@@ -59,6 +113,20 @@
                 android:text="Correct Answer"
                 android:textColor="@color/secondary"
                 android:textSize="14dp" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Incorrect Answer: "
+                android:textStyle="bold"
+                android:textSize="14dp" />
 
             <TextView
                 android:id="@+id/tv_incorrectanswer"
@@ -66,8 +134,8 @@
                 android:layout_height="wrap_content"
                 android:text="Incorrect answer"
                 android:textSize="14dp" />
+        </LinearLayout>
     </LinearLayout>
-
 
 
 </androidx.cardview.widget.CardView>

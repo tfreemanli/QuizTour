@@ -1,6 +1,8 @@
 package com.freeman.quiztour;
 
 import android.content.Context;
+import android.text.Html;
+import android.text.Spanned;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,15 +33,16 @@ public class CreateQuizRVAdapter extends RecyclerView.Adapter<CreateQuizRVAdapte
     @Override
     public void onBindViewHolder(@NonNull CreateQuizRVHolder holder, int position) {
         Question question = questions.get(position);
-        holder.tv_question.setText(question.getQuestion());
+        holder.tv_question.setText(getNonHTMLString(question.getQuestion()));
         holder.tv_type.setText(question.getType());
-        holder.tv_category.setText(question.getCategory());
-        holder.tv_correctanswer.setText(question.getCorrect_answer());
+        holder.tv_category.setText(getNonHTMLString(question.getCategory()));
+        holder.tv_difficulty.setText(question.getDifficulty());
+        holder.tv_correctanswer.setText(getNonHTMLString(question.getCorrect_answer()));
         String temp = "";
-        ArrayList<String> alIncorrect = question.getIncorrect_answer();
+        ArrayList<String> alIncorrect = question.getIncorrect_answers();
         if(alIncorrect!=null){
             for(String str: alIncorrect){
-                temp += (str + " | ");
+                temp += (getNonHTMLString(str) + " | ");
             }
         }
         holder.tv_incorrectanswer.setText(temp);
@@ -65,4 +68,10 @@ public class CreateQuizRVAdapter extends RecyclerView.Adapter<CreateQuizRVAdapte
             tv_incorrectanswer = itemView.findViewById(R.id.tv_incorrectanswer);
         }
     }
+
+    private String getNonHTMLString(String htmlString) {
+        Spanned spanned = Html.fromHtml(htmlString, Html.FROM_HTML_MODE_LEGACY);
+        return spanned.toString();
+    }
+
 }
