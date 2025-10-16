@@ -9,6 +9,8 @@ public class Rate {
         this.email = email;
     }
 
+    public Rate(){}
+
     public int getRate() {
         return rate;
     }

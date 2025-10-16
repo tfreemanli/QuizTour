@@ -4,9 +4,28 @@ import android.content.Context;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+
 import java.util.ArrayList;
 
 public class Config {
+    private static Config instance;
+    private Quiz quiz;
+
+    private Config() {}
+
+    public static synchronized Config getInstance() {
+        if (instance == null) {
+            instance = new Config();
+        }
+        return instance;
+    }
+
+    public Quiz getQuiz() {
+        return quiz;
+    }
+    public void setQuiz(Quiz quiz) {
+        this.quiz = quiz;
+    }
 
     public static void init_difficulty_spinner(Spinner spn_difficulty, Context context){
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
@@ -16,6 +35,16 @@ public class Config {
         );
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spn_difficulty.setAdapter(adapter);
+    }
+
+    public static void init_filter_spinner(Spinner spn_quiz_filter, Context context){
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                context,
+                R.array.quiz_filter,
+                android.R.layout.simple_spinner_item
+        );
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spn_quiz_filter.setAdapter(adapter);
     }
 
     public static void init_category_spinner(Spinner spn_category, Context context){

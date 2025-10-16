@@ -1,6 +1,9 @@
 package com.freeman.quiztour;
 
 import android.content.Context;
+import android.content.Intent;
+import android.text.Html;
+import android.text.Spanned;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,11 +39,20 @@ public class AdminMainRVAdapter extends RecyclerView.Adapter<AdminMainRVAdapter.
     @Override
     public void onBindViewHolder(@NonNull AdminMainRVHolder holder, int position) {
         Quiz quiz = quizzes.get(position);
-        holder.tv_name.setText(quiz.getName());
-        holder.tv_category.setText(quiz.getCategory());
+        holder.tv_name.setText(getNonHTMLString(quiz.getName()));
+        holder.tv_category.setText(getNonHTMLString(quiz.getCategory()));
         holder.tv_difficulty.setText(quiz.getDifficulty());
-        holder.tv_startdate.setText(""+quiz.getStartdate());
-        holder.tv_enddate.setText(""+quiz.getEnddate());
+        holder.tv_startdate.setText(quiz.getStartdate());
+        holder.tv_enddate.setText(quiz.getEnddate());
+
+        holder.card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Config.getInstance().setQuiz(quiz);
+                Intent i = new Intent(context, UpdateQuizActivity.class);
+                context.startActivity(i);
+            }
+        });
     }
 
     public static class AdminMainRVHolder extends RecyclerView.ViewHolder{
@@ -57,5 +69,10 @@ public class AdminMainRVAdapter extends RecyclerView.Adapter<AdminMainRVAdapter.
             tv_enddate = itemView.findViewById(R.id.tv_enddate);
         }
 
+    }
+
+    private String getNonHTMLString(String htmlString) {
+        Spanned spanned = Html.fromHtml(htmlString, Html.FROM_HTML_MODE_LEGACY);
+        return spanned.toString();
     }
 }

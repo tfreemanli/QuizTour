@@ -1,6 +1,7 @@
 package com.freeman.quiztour;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -137,7 +138,7 @@ public class CreateQuizActivity extends AppCompatActivity implements QuestionCal
         QuestionController api = new QuestionController(this);
         CategoryItem curCate = (CategoryItem)spn_category.getSelectedItem();
         String curDifficulty = spn_difficulty.getSelectedItem().toString();
-        if(curDifficulty.toLowerCase().contains("any difficulty")){ curDifficulty = null; }
+        if(curDifficulty.toLowerCase().contains("random difficulty")){ curDifficulty = null; }
         api.start(curDifficulty, curCate.getId(), this);
     }
 
@@ -163,6 +164,8 @@ public class CreateQuizActivity extends AppCompatActivity implements QuestionCal
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
+                        //newquiz.setId(documentReference.getId());
+                        documentReference.update("id", documentReference.getId());
                         Log.d(TAG, "Quiz added with ID: " + documentReference.getId());
                         Toast.makeText(getApplicationContext(), "Quiz added with ID: " + documentReference.getId(), Toast.LENGTH_SHORT).show();
                     }
@@ -174,8 +177,15 @@ public class CreateQuizActivity extends AppCompatActivity implements QuestionCal
                         Toast.makeText(getApplicationContext(), "Failed in adding Quiz.", Toast.LENGTH_SHORT).show();
                     }
                 });
-
+        cancel(view);
     }
+
+    public void cancel(View view) {
+        Intent i = new Intent(CreateQuizActivity.this, AdminMainActivity.class);
+        startActivity(i);
+        finish();
+    }
+
 
     @Override
     public void onSuccess(ArrayList<Question> arr) {

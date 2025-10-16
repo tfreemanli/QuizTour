@@ -4,14 +4,15 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Quiz {
-    private String name, category, difficulty,startdate, enddate;
+    private String id, name, category, difficulty,startdate, enddate;
     private ArrayList<Question> questions;
     private ArrayList<Rate> rates;
 
     public Quiz() {
     }
 
-    public Quiz(String name, String category, String difficulty, String startdate, String enddate, ArrayList<Rate> rate, ArrayList<Question> questions) {
+    public Quiz(String id, String name, String category, String difficulty, String startdate, String enddate, ArrayList<Rate> rate, ArrayList<Question> questions) {
+        this.id = id;
         this.name = name;
         this.category = category;
         this.difficulty = difficulty;
@@ -20,6 +21,15 @@ public class Quiz {
         this.rates = rate;
         this.questions = questions;
     }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
 
     public String getName() {
         return name;
