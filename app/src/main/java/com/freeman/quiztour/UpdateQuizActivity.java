@@ -1,6 +1,7 @@
 package com.freeman.quiztour;
 
 import android.app.DatePickerDialog;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -99,7 +100,35 @@ public class UpdateQuizActivity extends AppCompatActivity {
 
         cancel(view);
     }
-    public void delete(View view){}
+
+    //when delete button clicked
+    public void delete(View view){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Delete Quiz");
+        builder.setMessage("Are you sure you want to delete this quiz?");
+        builder.setPositiveButton("Yes", (dialog, which) -> {
+            deleteQuiz(currQuiz.getId());
+            cancel(view);
+        });
+        builder.setNegativeButton("No", (dialog, which) -> {
+            dialog.dismiss();
+        });
+        builder.show();
+
+    }
+
+    public void deleteQuiz(String id){
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("Quiz").document(id)
+                .delete()
+                .addOnSuccessListener(aVoid -> Toast.makeText(this, "Quiz deleted", Toast.LENGTH_SHORT).show())
+                .addOnFailureListener(e -> {
+                    Toast.makeText(this, "Quiz NOT deleted", Toast.LENGTH_SHORT).show();
+                    Log.d("Firestore", "Error deleting quiz", e);
+                });
+    }
+
+    //When cancel button clicked
     public void cancel(View view){
         Intent i = new Intent(UpdateQuizActivity.this, AdminMainActivity.class);
         startActivity(i);

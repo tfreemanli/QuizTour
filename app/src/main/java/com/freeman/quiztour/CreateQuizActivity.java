@@ -101,19 +101,31 @@ public class CreateQuizActivity extends AppCompatActivity implements QuestionCal
 
     private boolean validate() {
         if (et_name.getText().toString().isEmpty()) {
-            et_name.setError("Name is required");
+            Toast.makeText(getApplicationContext(), "Name is required", Toast.LENGTH_SHORT).show();
             return false;
         }
         String sStartdate = tv_startdate.getText().toString();
         if (sStartdate.isEmpty() || !isValidDate(sStartdate, "dd/MM/yyyy")) {
-            tv_startdate.setError("Start date is not validated");
+            Toast.makeText(getApplicationContext(), "Start date is not validated", Toast.LENGTH_SHORT).show();
             return false;
         }
         String sEnddate = tv_enddate.getText().toString();
         if(sEnddate.isEmpty() || !isValidDate(sEnddate, "dd/MM/yyyy")) {
-            tv_enddate.setError("End date is not validated");
+            Toast.makeText(getApplicationContext(), "End date is not validated", Toast.LENGTH_SHORT).show();
             return false;
         }
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        sdf.setLenient(false); // 关闭宽松解析，严格判断
+        try {
+            if(sdf.parse(sStartdate).after(sdf.parse(sEnddate))){
+                Toast.makeText(getApplicationContext(), "End date shall not before Start date.", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        } catch (ParseException e) {
+            return false; // 解析失败，说明不合法
+        }
+
         if(questions == null || questions.size() == 0) {
             Toast.makeText(this, "Reload questions first please.", Toast.LENGTH_SHORT).show();
             return false;

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "857421435479",
+    "project_id": "ass2quiztour",
+    "storage_bucket": "ass2quiztour.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:857421435479:android:573165a6fce74bb5384912",
+        "android_client_info": {
+          "package_name": "com.freeman.quiztour"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD0OhnlGCG7Pzb6M_3FKebZvivG_pjy8nA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
