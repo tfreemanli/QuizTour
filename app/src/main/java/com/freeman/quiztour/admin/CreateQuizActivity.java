@@ -1,4 +1,4 @@
-package com.freeman.quiztour;
+package com.freeman.quiztour.admin;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
@@ -21,6 +21,14 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.freeman.quiztour.common.CategoryItem;
+import com.freeman.quiztour.common.Config;
+import com.freeman.quiztour.common.Question;
+import com.freeman.quiztour.common.QuestionCallback;
+import com.freeman.quiztour.common.QuestionController;
+import com.freeman.quiztour.common.Quiz;
+import com.freeman.quiztour.R;
+import com.freeman.quiztour.common.Rate;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
@@ -32,7 +40,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-public class CreateQuizActivity extends AppCompatActivity implements QuestionCallback{
+public class CreateQuizActivity extends AppCompatActivity implements QuestionCallback {
     EditText et_name;
     Spinner spn_category, spn_difficulty;
     Button btn_start_datepick, btn_end_datepick;
@@ -47,7 +55,7 @@ public class CreateQuizActivity extends AppCompatActivity implements QuestionCal
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_create_quiz);
+        setContentView(R.layout.activity_admin_create_quiz);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);

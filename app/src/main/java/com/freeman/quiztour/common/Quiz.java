@@ -1,7 +1,6 @@
-package com.freeman.quiztour;
+package com.freeman.quiztour.common;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Quiz {
     private String id, name, category, difficulty,startdate, enddate;

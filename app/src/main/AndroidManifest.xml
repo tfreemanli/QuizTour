@@ -14,13 +14,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.QuizTour">
         <activity
-            android:name=".UpdateQuizActivity"
+            android:name=".player.PlayerPlayQuizActivity"
             android:exported="false" />
         <activity
-            android:name=".CreateQuizActivity"
+            android:name=".player.PlayerMainActivity"
             android:exported="false" />
         <activity
-            android:name=".AdminMainActivity"
+            android:name=".admin.UpdateQuizActivity"
+            android:exported="false" />
+        <activity
+            android:name=".admin.CreateQuizActivity"
+            android:exported="false" />
+        <activity
+            android:name=".admin.AdminMainActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:gravity="start"
     android:orientation="vertical"
-    tools:context=".CreateQuizActivity">
+    tools:context=".admin.CreateQuizActivity">
 
     <!-- Title Bar -->
     <LinearLayout
@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:fontFamily="sans-serif-black"
-            android:text="Update Quiz"
+            android:text="Create Quiz"
             android:textColor="@color/white"
             android:textSize="20dp" />
 
@@ -34,12 +34,28 @@
     </LinearLayout>
 
     <EditText
-        android:id="@+id/et_updatequiz_name"
+        android:id="@+id/et_createquiz_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:hint="Name"
         android:inputType="text" />
+
+    <Spinner
+        android:id="@+id/spn_createquiz_category"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_margin="5dp"
+        android:spinnerMode="dropdown"
+        android:background="@drawable/spinner_custom_bg"/>
+
+    <Spinner
+        android:id="@+id/spn_createquiz_difficulty"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_margin="5dp"
+        android:background="@drawable/spinner_custom_bg"
+        android:spinnerMode="dropdown"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -48,17 +64,18 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/tv_updatequiz_startdate"
+            android:id="@+id/tv_startdate"
             android:layout_width="0dp"
             android:layout_height="25dp"
             android:layout_weight="1"
             android:inputType="date"
             android:hint="Start Date"
             android:textAlignment="center"
-            android:background="@drawable/border_bg" />
+            android:background="@drawable/border_bg"
+            />
 
         <Button
-            android:id="@+id/btn_updatequiz_startdatepick"
+            android:id="@+id/btn_start_datepick"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:text="D"
@@ -68,7 +85,7 @@
             android:layout_marginRight="15dp"/>
 
         <TextView
-            android:id="@+id/tv_updatequiz_enddate"
+            android:id="@+id/tv_enddate"
             android:layout_width="0dp"
             android:layout_height="25dp"
             android:layout_weight="1"
@@ -78,7 +95,7 @@
             android:hint="End Date"/>
 
         <Button
-            android:id="@+id/btn_updatequiz_enddatepick"
+            android:id="@+id/btn_end_datepick"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:text="D"
@@ -88,19 +105,8 @@
             android:layout_marginRight="15dp"/>
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/tv_updatequiz_category"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="Category"/>
-    <TextView
-        android:id="@+id/tv_updatequiz_difficulty"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="Difficulty"/>
-
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_updatequiz_question"
+        android:id="@+id/rv_question"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"/>
@@ -114,16 +120,25 @@
         android:gravity="end"
         android:orientation="horizontal">
         <Button
-            android:id="@+id/btn_updatequiz_update"
+            android:id="@+id/btn_createquiz_reload"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Update"
+            android:text="ReLoad"
             android:layout_marginHorizontal="3dp"
             android:textColor="@color/black"
             android:backgroundTint="@color/primary"
-            android:onClick="update"/>
+            android:onClick="reload"/>
         <Button
-            android:id="@+id/btn_updatequiz_cancel"
+            android:id="@+id/btn_createquiz_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Save"
+            android:layout_marginHorizontal="3dp"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/primary"
+            android:onClick="save"/>
+        <Button
+            android:id="@+id/btn_createquiz_cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Cancel"
@@ -131,15 +146,6 @@
             android:textColor="@color/black"
             android:backgroundTint="@color/third"
             android:onClick="cancel"/>
-        <Button
-            android:id="@+id/btn_updatequiz_delete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Delete"
-            android:layout_marginHorizontal="3dp"
-            android:textColor="@color/black"
-            android:backgroundTint="@color/danger"
-            android:onClick="delete"/>
     </LinearLayout>
 
 </LinearLayout>

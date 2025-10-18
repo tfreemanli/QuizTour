@@ -1,4 +1,4 @@
-package com.freeman.quiztour;
+package com.freeman.quiztour.admin;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +12,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.freeman.quiztour.common.Config;
+import com.freeman.quiztour.common.Quiz;
+import com.freeman.quiztour.R;
 
 import java.util.ArrayList;
 

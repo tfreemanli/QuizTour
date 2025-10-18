@@ -1,9 +1,11 @@
-package com.freeman.quiztour;
+package com.freeman.quiztour.common;
 
 import android.content.Context;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+
+import com.freeman.quiztour.R;
 
 import java.util.ArrayList;
 
@@ -37,10 +39,10 @@ public class Config {
         spn_difficulty.setAdapter(adapter);
     }
 
-    public static void init_filter_spinner(Spinner spn_quiz_filter, Context context){
+    public static void init_filter_spinner(Spinner spn_quiz_filter, int arrayID, Context context){
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
                 context,
-                R.array.quiz_filter,
+                arrayID,
                 android.R.layout.simple_spinner_item
         );
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

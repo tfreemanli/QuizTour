@@ -1,4 +1,4 @@
-package com.freeman.quiztour;
+package com.freeman.quiztour.common;
 
 import android.text.Html;
 import android.text.Spanned;

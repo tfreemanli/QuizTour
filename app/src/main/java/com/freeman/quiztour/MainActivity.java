@@ -11,6 +11,9 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.freeman.quiztour.admin.AdminMainActivity;
+import com.freeman.quiztour.player.PlayerMainActivity;
+
 public class MainActivity extends AppCompatActivity {
     Button btn_admin, btn_player;
     @Override
@@ -30,6 +33,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(MainActivity.this, AdminMainActivity.class);
+                startActivity(i);
+            }
+        });
+        btn_player.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, PlayerMainActivity.class);
                 startActivity(i);
             }
         });

@@ -1,4 +1,4 @@
-package com.freeman.quiztour;
+package com.freeman.quiztour.common;
 
 public class Rate {
     private int rate;

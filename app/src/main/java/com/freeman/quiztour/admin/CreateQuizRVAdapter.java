@@ -1,4 +1,4 @@
-package com.freeman.quiztour;
+package com.freeman.quiztour.admin;
 
 import android.content.Context;
 import android.text.Html;
@@ -12,26 +12,29 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.freeman.quiztour.common.Question;
+import com.freeman.quiztour.R;
+
 import java.util.ArrayList;
 
-public class UpdateQuizRVAdapter extends RecyclerView.Adapter<UpdateQuizRVAdapter.UpdateQuizRVHolder> {
+public class CreateQuizRVAdapter extends RecyclerView.Adapter<CreateQuizRVAdapter.CreateQuizRVHolder> {
     ArrayList<Question> questions;
     Context context;
 
-    public UpdateQuizRVAdapter(ArrayList<Question> questions, Context context) {
+    public CreateQuizRVAdapter(ArrayList<Question> questions, Context context) {
         this.questions = questions;
         this.context = context;
     }
 
     @NonNull
     @Override
-    public UpdateQuizRVHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public CreateQuizRVHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.cardview_question, parent, false);
-        return new UpdateQuizRVHolder(view);
+        return new CreateQuizRVHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull UpdateQuizRVHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CreateQuizRVHolder holder, int position) {
         Question question = questions.get(position);
         holder.tv_question.setText(getNonHTMLString(question.getQuestion()));
         holder.tv_type.setText(question.getType());
@@ -54,10 +57,10 @@ public class UpdateQuizRVAdapter extends RecyclerView.Adapter<UpdateQuizRVAdapte
         return questions.size();
     }
 
-    public static class UpdateQuizRVHolder extends RecyclerView.ViewHolder{
+    public static class CreateQuizRVHolder extends RecyclerView.ViewHolder{
         CardView card;
         TextView tv_question, tv_category, tv_difficulty, tv_type, tv_correctanswer, tv_incorrectanswer;
-        public UpdateQuizRVHolder(@NonNull View itemView){
+        public CreateQuizRVHolder(@NonNull View itemView){
             super(itemView);
             card = itemView.findViewById(R.id.cardview_question);
             tv_question = itemView.findViewById(R.id.tv_question);

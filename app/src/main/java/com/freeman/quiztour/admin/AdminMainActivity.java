@@ -1,4 +1,4 @@
-package com.freeman.quiztour;
+package com.freeman.quiztour.admin;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,13 +17,14 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.freeman.quiztour.common.Config;
+import com.freeman.quiztour.common.Quiz;
+import com.freeman.quiztour.R;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 
 public class AdminMainActivity extends AppCompatActivity {
@@ -56,7 +57,7 @@ public class AdminMainActivity extends AppCompatActivity {
         });
 
         spn_quiz_filter = findViewById(R.id.spn_quiz_filter);
-        Config.init_filter_spinner(spn_quiz_filter, this);
+        Config.init_filter_spinner(spn_quiz_filter, R.array.quiz_filter ,this);
         spn_quiz_filter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

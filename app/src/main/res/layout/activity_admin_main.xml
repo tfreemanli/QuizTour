@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="start"
-    tools:context=".AdminMainActivity">
+    tools:context=".admin.AdminMainActivity">
 
     <!-- Title Bar -->
     <LinearLayout
@@ -36,17 +36,17 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="10dp"
+        android:padding="8dp"
         android:orientation="horizontal">
 
         <Spinner
             android:id="@+id/spn_quiz_filter"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:layout_weight="1"
-            >
-
-        </Spinner>
+            android:background="@drawable/spinner_custom_bg"
+            android:layout_height="30dp"
+            android:spinnerMode="dropdown"
+            android:layout_marginRight="10dp"/>
 
         <Button
             android:id="@+id/btn_quiz_add"
