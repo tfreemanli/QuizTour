@@ -2,6 +2,7 @@ package com.freeman.quiztour.player;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -49,7 +50,8 @@ public class PlayerMainActivity extends AppCompatActivity {
         });
 
         spn_player_quizfilter = findViewById(R.id.spn_player_quizfilter);
-        Config.init_filter_spinner(spn_player_quizfilter,R.array.player_quiz_filter,this);
+        Config.init_filter_spinner(spn_player_quizfilter, R.array.player_quiz_filter, this);
+        configSpinner();
 
         pb = findViewById(R.id.progressBar);
         rv_player_quizlist = findViewById(R.id.rv_player_quizlist);
@@ -71,10 +73,10 @@ public class PlayerMainActivity extends AppCompatActivity {
                             allQuiz.add(quiz);
                             //check if it is participated
                             ArrayList<Rate> rates = quiz.getRates();
-                            for(Rate rate: rates){
+                            for (Rate rate : rates) {
                                 String email = rate.getEmail();
                                 //TODO compare to Authentication email.
-                                if(email!=null && email.toLowerCase().equals("kingkongenzo@gmail.com")){
+                                if (email != null && email.toLowerCase().equals("kingkongenzo@gmail.com")) {
                                     participatedQuiz.add(quiz);
                                     break;
                                 }
@@ -85,11 +87,11 @@ public class PlayerMainActivity extends AppCompatActivity {
                                 Date startDate = sdf.parse(quiz.getStartdate());
                                 Date endDate = sdf.parse(quiz.getEnddate());
 
-                                if(currentDate.before(startDate)){
+                                if (currentDate.before(startDate)) {
                                     upcomingQuiz.add(quiz);
-                                }else if(currentDate.after(endDate)){
+                                } else if (currentDate.after(endDate)) {
                                     pastQuiz.add(quiz);
-                                }else{
+                                } else {
                                     onGoingQuiz.add(quiz);
                                 }
 
@@ -104,7 +106,7 @@ public class PlayerMainActivity extends AppCompatActivity {
                         rv_player_quizlist.setVisibility(View.VISIBLE);
 
 
-                    }else{
+                    } else {
                         pb.setVisibility(View.GONE);
                         Toast.makeText(this, "Error in loading Quiz.", Toast.LENGTH_SHORT).show();
 
@@ -112,5 +114,37 @@ public class PlayerMainActivity extends AppCompatActivity {
 
                 });
 
+    }
+
+    private void configSpinner() {
+        spn_player_quizfilter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String filter = spn_player_quizfilter.getSelectedItem().toString().toLowerCase();
+                Date currentDate = new Date();
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                switch (filter) {
+                    case "upcoming":
+                        adapter = new PlayerMainRVAdapter(upcomingQuiz, PlayerMainActivity.this, false);
+                        break;
+                    case "past":
+                        adapter = new PlayerMainRVAdapter(pastQuiz, PlayerMainActivity.this, false);
+                        break;
+                    case "participated":
+                        adapter = new PlayerMainRVAdapter(participatedQuiz, PlayerMainActivity.this, false);
+                        break;
+                    default:
+                        adapter = new PlayerMainRVAdapter(onGoingQuiz, PlayerMainActivity.this, true);
+                        break;
+                }
+                rv_player_quizlist.setAdapter(adapter);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 }
