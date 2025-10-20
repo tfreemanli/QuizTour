@@ -14,6 +14,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.QuizTour">
         <activity
+            android:name=".player.PlayerResultActivity"
+            android:exported="false" />
+        <activity
+            android:name=".player.PlayerViewQuizActivity"
+            android:exported="false" />
+        <activity
             android:name=".player.PlayerPlayQuizActivity"
             android:exported="false" />
         <activity
