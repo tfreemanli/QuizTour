@@ -4,21 +4,36 @@ import java.util.ArrayList;
 
 public class Quiz {
     private String id, name, category, difficulty,startdate, enddate;
+    private int rate;
     private ArrayList<Question> questions;
     private ArrayList<Rate> rates;
 
     public Quiz() {
     }
 
-    public Quiz(String id, String name, String category, String difficulty, String startdate, String enddate, ArrayList<Rate> rate, ArrayList<Question> questions) {
+    public Quiz(String id, String name, String category, String difficulty, String startdate, String enddate, ArrayList<Rate> rates, ArrayList<Question> questions, int rate) {
         this.id = id;
         this.name = name;
         this.category = category;
         this.difficulty = difficulty;
         this.startdate = startdate;
         this.enddate = enddate;
-        this.rates = rate;
+        this.rates = rates;
         this.questions = questions;
+        this.rate = rate;
+    }
+
+    public int getRate() {
+        int sum = 0;
+        for (Rate rate : rates) {
+            sum += rate.getRate();
+        }
+        rate = sum / rates.size();
+        return rate;
+    }
+
+    public void setRate(int rate) {
+        this.rate = rate;
     }
 
     public String getId() {

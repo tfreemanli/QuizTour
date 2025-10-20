@@ -19,6 +19,8 @@ import com.freeman.quiztour.R;
 import com.freeman.quiztour.common.Config;
 import com.freeman.quiztour.common.Quiz;
 import com.freeman.quiztour.common.Rate;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
@@ -37,6 +39,9 @@ public class PlayerMainActivity extends AppCompatActivity {
     ArrayList<Quiz> participatedQuiz;
     RecyclerView rv_player_quizlist;
     PlayerMainRVAdapter adapter;
+    FirebaseAuth mAuth;
+    FirebaseUser currUser;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +53,14 @@ public class PlayerMainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        //Get current user and email
+        mAuth = FirebaseAuth.getInstance();
+        currUser = mAuth.getCurrentUser();
+        if (currUser == null) {
+            finish();
+            return;
+        }
 
         spn_player_quizfilter = findViewById(R.id.spn_player_quizfilter);
         Config.init_filter_spinner(spn_player_quizfilter, R.array.player_quiz_filter, this);
@@ -68,6 +81,7 @@ public class PlayerMainActivity extends AppCompatActivity {
                         participatedQuiz = new ArrayList<>();
                         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                         Date currentDate = new Date();
+                        Outerloop:
                         for (var document : task.getResult()) {
                             Quiz quiz = document.toObject(Quiz.class);
                             allQuiz.add(quiz);
@@ -75,10 +89,9 @@ public class PlayerMainActivity extends AppCompatActivity {
                             ArrayList<Rate> rates = quiz.getRates();
                             for (Rate rate : rates) {
                                 String email = rate.getEmail();
-                                //TODO compare to Authentication email.
-                                if (email != null && email.toLowerCase().equals("kingkongenzo@gmail.com")) {
+                                if (email != null && email.toLowerCase().equals(currUser.getEmail().toLowerCase())) {
                                     participatedQuiz.add(quiz);
-                                    break;
+                                    continue Outerloop;
                                 }
                             }
 

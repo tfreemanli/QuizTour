@@ -175,7 +175,7 @@ public class CreateQuizActivity extends AppCompatActivity implements QuestionCal
         newquiz.setStartdate(tv_startdate.getText().toString());
         newquiz.setEnddate(tv_enddate.getText().toString());
         ArrayList<Rate> rates = new ArrayList<Rate>();
-        rates.add(new Rate(5,"sample@email.com"));
+        rates.add(new Rate(5,"sample@email.com",0));
         newquiz.setRates(rates);
         newquiz.setQuestions(questions);
         // Add a new document with a generated ID

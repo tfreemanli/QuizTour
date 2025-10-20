@@ -54,6 +54,7 @@ public class PlayerMainRVAdapter extends RecyclerView.Adapter<PlayerMainRVAdapte
         holder.tv_difficulty.setText(quiz.getDifficulty());
         holder.tv_startdate.setText(quiz.getStartdate());
         holder.tv_enddate.setText(quiz.getEnddate());
+        holder.tv_rate.setText("" + quiz.getRate());
 
         if(isPlayable) {
             ((PlayerMainRVHolderPlayable)holder).btn_player_start.setOnClickListener(new View.OnClickListener() {
@@ -74,7 +75,7 @@ public class PlayerMainRVAdapter extends RecyclerView.Adapter<PlayerMainRVAdapte
 
 
     public class PlayerMainRVHolder extends RecyclerView.ViewHolder {
-        TextView tv_quiz_name, tv_category, tv_difficulty, tv_startdate, tv_enddate;
+        TextView tv_quiz_name, tv_category, tv_difficulty, tv_startdate, tv_enddate, tv_rate;
 
         public PlayerMainRVHolder(@NonNull View itemView) {
             super(itemView);
@@ -83,7 +84,7 @@ public class PlayerMainRVAdapter extends RecyclerView.Adapter<PlayerMainRVAdapte
             tv_difficulty = itemView.findViewById(R.id.tv_difficulty);
             tv_startdate = itemView.findViewById(R.id.tv_startdate);
             tv_enddate = itemView.findViewById(R.id.tv_enddate);
-
+            tv_rate = itemView.findViewById(R.id.tv_rate);
         }
     }
 
