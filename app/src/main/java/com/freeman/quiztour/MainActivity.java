@@ -23,12 +23,12 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
     Button btn_admin, btn_player;
     EditText et_email, et_password;
     Button btn_login, btn_register;
 
-    private FirebaseAuth mAuth;
+    //private FirebaseAuth mAuth;
     private static final String TAG = "MainActivity";
 
     @Override
@@ -41,8 +41,9 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        setupProfile();
 
-        mAuth = FirebaseAuth.getInstance();
+        //mAuth = FirebaseAuth.getInstance();
 
         et_email = findViewById(R.id.et_email);
         et_password = findViewById(R.id.et_password);
@@ -72,8 +73,6 @@ public class MainActivity extends AppCompatActivity {
                 et_password.setText("12345678");
             }
         });
-
-
     }
 
     public void login() {
@@ -92,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
+                            //FirebaseUser aUser = mAuth.getCurrentUser();
                             Log.d(TAG, "signInWithEmail:success");
                             Toast.makeText(MainActivity.this, "Login successful.",
                                     Toast.LENGTH_SHORT).show();

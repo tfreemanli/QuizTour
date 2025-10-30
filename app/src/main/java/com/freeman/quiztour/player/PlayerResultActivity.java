@@ -14,6 +14,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.freeman.quiztour.BaseActivity;
 import com.freeman.quiztour.R;
 import com.freeman.quiztour.common.Config;
 import com.freeman.quiztour.common.Quiz;
@@ -24,14 +25,12 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 
-public class PlayerResultActivity extends AppCompatActivity {
+public class PlayerResultActivity extends BaseActivity {
     TextView tv_score;
     Button btn_save;
     int score;
     Quiz quiz;
     RadioGroup rg_rate;
-    FirebaseAuth mAuth;
-    FirebaseUser currUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,11 +42,12 @@ public class PlayerResultActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        setupProfile();
 
         //Get current user and email
         mAuth = FirebaseAuth.getInstance();
-        currUser = mAuth.getCurrentUser();
-        if (currUser == null) {
+        currentUser = mAuth.getCurrentUser();
+        if (currentUser == null) {
             finish();
             return;
         }
@@ -62,7 +62,7 @@ public class PlayerResultActivity extends AppCompatActivity {
 
 
         btn_save.setOnClickListener(v -> {
-            String email = currUser.getEmail();
+            String email = currentUser.getEmail();
             if (email == null) {
                 Toast.makeText(getApplicationContext(), "Email not found", Toast.LENGTH_SHORT).show();
                 return;

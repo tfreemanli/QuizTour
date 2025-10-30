@@ -21,6 +21,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.freeman.quiztour.BaseActivity;
 import com.freeman.quiztour.common.CategoryItem;
 import com.freeman.quiztour.common.Config;
 import com.freeman.quiztour.common.Question;
@@ -40,7 +41,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-public class CreateQuizActivity extends AppCompatActivity implements QuestionCallback {
+public class CreateQuizActivity extends BaseActivity implements QuestionCallback {
     EditText et_name;
     Spinner spn_category, spn_difficulty;
     Button btn_start_datepick, btn_end_datepick;
@@ -61,6 +62,7 @@ public class CreateQuizActivity extends AppCompatActivity implements QuestionCal
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        setupProfile();
 
         et_name = findViewById(R.id.et_createquiz_name);
 

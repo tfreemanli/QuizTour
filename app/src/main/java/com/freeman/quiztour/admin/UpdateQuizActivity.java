@@ -20,6 +20,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.freeman.quiztour.BaseActivity;
 import com.freeman.quiztour.common.Config;
 import com.freeman.quiztour.common.Question;
 import com.freeman.quiztour.common.Quiz;
@@ -35,7 +36,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class UpdateQuizActivity extends AppCompatActivity {
+public class UpdateQuizActivity extends BaseActivity {
     EditText et_name;
     TextView tv_category, tv_difficulty,tv_startdate, tv_enddate;
     Button btn_start_datepick, btn_end_datepick;
@@ -56,6 +57,7 @@ public class UpdateQuizActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        setupProfile();
 
         currQuiz = Config.getInstance().getQuiz();
         et_name = findViewById(R.id.et_updatequiz_name);

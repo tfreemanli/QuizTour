@@ -15,6 +15,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.freeman.quiztour.BaseActivity;
 import com.freeman.quiztour.R;
 import com.freeman.quiztour.common.Config;
 import com.freeman.quiztour.common.Quiz;
@@ -27,7 +28,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class PlayerMainActivity extends AppCompatActivity {
+public class PlayerMainActivity extends BaseActivity {
     private static final String TAG = "PlayerMainActivity";
     Spinner spn_player_quizfilter;
     FirebaseFirestore db;
@@ -39,8 +40,6 @@ public class PlayerMainActivity extends AppCompatActivity {
     ArrayList<Quiz> participatedQuiz;
     RecyclerView rv_player_quizlist;
     PlayerMainRVAdapter adapter;
-    FirebaseAuth mAuth;
-    FirebaseUser currUser;
 
 
     @Override
@@ -53,11 +52,12 @@ public class PlayerMainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        setupProfile();
 
         //Get current user and email
         mAuth = FirebaseAuth.getInstance();
-        currUser = mAuth.getCurrentUser();
-        if (currUser == null) {
+        currentUser = mAuth.getCurrentUser();
+        if (currentUser == null) {
             finish();
             return;
         }
@@ -89,7 +89,7 @@ public class PlayerMainActivity extends AppCompatActivity {
                             ArrayList<Rate> rates = quiz.getRates();
                             for (Rate rate : rates) {
                                 String email = rate.getEmail();
-                                if (email != null && email.toLowerCase().equals(currUser.getEmail().toLowerCase())) {
+                                if (email != null && email.toLowerCase().equals(currentUser.getEmail().toLowerCase())) {
                                     participatedQuiz.add(quiz);
                                     continue Outerloop;
                                 }

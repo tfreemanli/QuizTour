@@ -14,6 +14,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.freeman.quiztour.BaseActivity;
 import com.freeman.quiztour.R;
 import com.freeman.quiztour.common.Config;
 import com.freeman.quiztour.common.Question;
@@ -21,7 +22,7 @@ import com.freeman.quiztour.common.Quiz;
 
 import java.util.ArrayList;
 
-public class PlayerPlayQuizActivity extends AppCompatActivity {
+public class PlayerPlayQuizActivity extends BaseActivity {
     Quiz currQuiz;
     TextView tv_timer, tv_score, tv_questionnumber, tv_question;
     RadioGroup rg_options;
@@ -41,6 +42,7 @@ public class PlayerPlayQuizActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        setupProfile();
 
         tv_timer = findViewById(R.id.tv_timer);
         tv_score = findViewById(R.id.tv_score);

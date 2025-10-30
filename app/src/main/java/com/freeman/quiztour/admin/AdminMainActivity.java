@@ -17,6 +17,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.freeman.quiztour.BaseActivity;
 import com.freeman.quiztour.common.Config;
 import com.freeman.quiztour.common.Quiz;
 import com.freeman.quiztour.R;
@@ -27,7 +28,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 
-public class AdminMainActivity extends AppCompatActivity {
+public class AdminMainActivity extends BaseActivity {
     Button btn_quiz_add;
     Spinner spn_quiz_filter;
     RecyclerView rv;
@@ -46,6 +47,7 @@ public class AdminMainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        setupProfile();
 
         btn_quiz_add = findViewById(R.id.btn_quiz_add);
         btn_quiz_add.setOnClickListener(new View.OnClickListener() {

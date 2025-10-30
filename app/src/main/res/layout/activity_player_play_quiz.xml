@@ -8,24 +8,8 @@
     android:orientation="vertical"
     tools:context=".player.PlayerPlayQuizActivity">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/quiztour_banner" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:background="@color/third"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Assignment2 MiniProject  Chengfeng Li #1602741" />
-    </LinearLayout>
+    <!--Banner-->
+    <include layout="@layout/inc_banner" />
 
     <!-- Quiz Part -->
     <LinearLayout

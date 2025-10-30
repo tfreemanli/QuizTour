@@ -27,10 +27,7 @@
             android:textColor="@color/white"
             android:textSize="20dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Assignment2 MiniProject  Chengfeng Li #1602741" />
+        <include layout="@layout/inc_admin_profile"/>
     </LinearLayout>
 
     <EditText

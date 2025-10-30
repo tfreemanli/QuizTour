@@ -8,9 +8,10 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.freeman.quiztour.BaseActivity;
 import com.freeman.quiztour.R;
 
-public class PlayerViewQuizActivity extends AppCompatActivity {
+public class PlayerViewQuizActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,5 +23,6 @@ public class PlayerViewQuizActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        setupProfile();
     }
 }
